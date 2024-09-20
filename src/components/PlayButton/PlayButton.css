@@ -1,0 +1,18 @@
+.play-button-container {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* todo merge */
+.play-player-button {
+  width: 16px;
+  height: 16px;
+}
+.play-line-button {
+  width: 16px;
+  height: 16px;
+}

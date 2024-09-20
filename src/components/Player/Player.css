@@ -1,0 +1,57 @@
+.progress-bar {
+  /* Change the height of the progress bar */
+  height: 2px;
+
+  /* Change the background color (the unfilled part) */
+  background: #ddd;
+
+  /* Get rid of the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.progress-bar::-webkit-progress-bar {
+  /* Change the background color (the unfilled part) */
+  background: #ddd;
+}
+
+.progress-bar::-webkit-progress-value {
+  /* Change the bar color (the filled part) */
+  background: #4caf50;
+}
+
+.progress-bar::-moz-progress-bar {
+  /* Change the bar color (the filled part) */
+  background: #4caf50;
+}
+
+.player {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas: "now-playing control-bar volume";
+  gap: 8px;
+}
+
+.player > .now-playing {
+  display: grid;
+  grid-area: now-playing;
+  grid-template-columns: 60px auto;
+  grid-template-areas: "cover-art title";
+  gap: 8px;
+}
+
+.player > .control-bar {
+  grid-area: control-bar;
+}
+
+.player > .volume {
+  grid-area: volume;
+}
+
+.now-playing > .cover-art {
+  margin-left: 8px;
+  align-self: center;
+  grid-area: cover-art; background-size: cover; display: flex; 
+  justify-content: center; align-items: center; width: 48px; height: 48px;
+}
+.now-playing > .title { grid-area: title;  align-self: center; }
