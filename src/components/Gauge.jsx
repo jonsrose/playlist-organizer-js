@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 const Gauge = ({ radius, value, className }) => {
   const strokeWidth = radius * 0.2;
@@ -45,6 +46,12 @@ const Gauge = ({ radius, value, className }) => {
       </svg>
     </div>
   );
+};
+
+Gauge.propTypes = {
+  radius: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+  className: PropTypes.string,
 };
 
 export default Gauge;

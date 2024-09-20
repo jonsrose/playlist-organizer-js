@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Draggable } from '@hello-pangea/dnd'
 import ContextModal from './ContextModal';
 import useStore from '../../store/store';
@@ -6,6 +6,7 @@ import { formatDuration, getBgColorForKey, getTempoColor, getContrast } from '..
 import Gauge from '../Gauge';
 import IndexComponent from '../PlaylistItemIndex/PlaylistItemIndex';
 import SpotifyLink from '../SpotifyLink';
+import PropTypes from 'prop-types';
 
 const PlaylistItem = (
   { 
@@ -128,6 +129,23 @@ const PlaylistItem = (
         )}
       </Draggable>
   );
+};
+
+PlaylistItem.propTypes = {
+  track: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  playlistId: PropTypes.string.isRequired,
+  selectedTrack: PropTypes.object,
+  playPlaylistTrack: PropTypes.func,
+  pause: PropTypes.bool,
+  handleRightClick: PropTypes.func,
+  handleClick: PropTypes.func,
+  showMenu: PropTypes.bool,
+  menuRef: PropTypes.object,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  setShowMenu: PropTypes.func,
+  playlistRef: PropTypes.object,
 };
 
 export default PlaylistItem;

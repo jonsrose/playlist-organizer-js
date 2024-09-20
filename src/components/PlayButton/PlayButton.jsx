@@ -1,5 +1,6 @@
 import { MutedIcon, PauseIcon, PlayIcon, PlayingIcon, PlayNextIcon, PlayPreviousIcon, VolumeIcon } from '../icons';
 import './PlayButton.css';
+import PropTypes from 'prop-types';
 
 export const PlayPlayerButtonContainer = ({ children, onClick }) => (
   <div className="play-button-container" onClick={onClick}>
@@ -9,6 +10,11 @@ export const PlayPlayerButtonContainer = ({ children, onClick }) => (
   </div>
 );
 
+PlayPlayerButtonContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 export const PlayLineButtonContainer = ({ children, onClick }) => (
   <div className="play-button-container" onClick={onClick}>
     <div className="play-line-button">
@@ -17,6 +23,10 @@ export const PlayLineButtonContainer = ({ children, onClick }) => (
   </div>
 );
 
+PlayLineButtonContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export const PlayButton = ({ PlayButtonContainer, play, pause, track, isPaused }) => {
   const handleClick = () => {
@@ -32,7 +42,15 @@ export const PlayButton = ({ PlayButtonContainer, play, pause, track, isPaused }
       {isPaused ? <PlayIcon /> : <PauseIcon />}
     </PlayButtonContainer>
   );
-};  
+};
+
+PlayButton.propTypes = {
+  PlayButtonContainer: PropTypes.elementType.isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
+  track: PropTypes.object.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+};
 
 export const PlayingButton = () => (
   <div className="play-button-container">
@@ -50,6 +68,10 @@ export const PlayNext = ({ onClick }) => (
   </div>
 );
 
+PlayNext.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
+
 export const PlayPrevious = ({ onClick }) => (
   <div className="play-button-container" onClick={onClick}>
     <div className="play-player-button">
@@ -58,6 +80,9 @@ export const PlayPrevious = ({ onClick }) => (
   </div>
 );
 
+PlayPrevious.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export const VolumeButton = ({ mute, unmute, isMuted }) => {
   const handleClick = () => {
@@ -76,5 +101,11 @@ export const VolumeButton = ({ mute, unmute, isMuted }) => {
     </div>
   )}
 ;
+
+VolumeButton.propTypes = {
+  mute: PropTypes.func.isRequired,
+  unmute: PropTypes.func.isRequired,
+  isMuted: PropTypes.bool.isRequired,
+};
 
 export default PlayButton;

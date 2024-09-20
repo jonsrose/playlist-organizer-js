@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useStore from '../../store/store';
 import { createPlaylist } from '../../services/api';
+import PropTypes from 'prop-types';
 
 const NewPlaylistModal = ({ isOpen, setIsOpen }) => {
   const userId = useStore((state) => state.userId);
@@ -28,23 +29,18 @@ const NewPlaylistModal = ({ isOpen, setIsOpen }) => {
 
   const handleSave = async () => {
     if (inputRef.current) {
-      try {
-        const playlistName = inputRef.current.value;
-        createPlaylistMutation.mutate ({ userId, playlistName });
+      const playlistName = inputRef.current.value;
+      createPlaylistMutation.mutate ({ userId, playlistName });
 
-        // setIsOpen(false)
+      // setIsOpen(false)
 
-        // queryClient.setQueryData(["myPlaylists"], (old) => {
-        //   // why does the following line cause this error: Spread types may only be created from object types.ts(2698) (parameter) old: unknown
-        //   const newData = {...old};
+      // queryClient.setQueryData(["myPlaylists"], (old) => {
+      //   // why does the following line cause this error: Spread types may only be created from object types.ts(2698) (parameter) old: unknown
+      //   const newData = {...old};
 
-        //   newData.pages[0].items = [newPlaylist, ...newData.pages[0].items]
-        //   return newData;
-        // });
-
-      } catch (error) {
-        // console.error(error);
-      }
+      //   newData.pages[0].items = [newPlaylist, ...newData.pages[0].items]
+      //   return newData;
+      // });
     } else {
       setIsOpen(false)
     }
@@ -70,6 +66,11 @@ const NewPlaylistModal = ({ isOpen, setIsOpen }) => {
       )}
     </>
   );
+};
+
+NewPlaylistModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
 };
 
 export default NewPlaylistModal;

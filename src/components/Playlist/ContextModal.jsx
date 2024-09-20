@@ -4,6 +4,7 @@ import { QueryClient, useInfiniteQuery, useMutation } from '@tanstack/react-quer
 import useObserver from '../../hooks/useObserver';
 import { getNextPageParam } from '../../utils'
 import { addItemsToPlaylist, getPlaylists, deleteTrackFromPlaylist } from '../../services/api';
+import PropTypes from 'prop-types';
 
 function ContextModal({ 
   menuRef,
@@ -140,5 +141,15 @@ function ContextModal({
     </div>
   )
 }
+
+ContextModal.propTypes = {
+  menuRef: PropTypes.oneOfType([
+    PropTypes.func, 
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+  ]),
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
+};
 
 export default ContextModal;

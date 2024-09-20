@@ -104,19 +104,14 @@ export const updatePlaylist = async ({
   insertBefore,
   rangeLength
 }) => {
-  try {
-    await axios.put(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
-      {
-        "range_start": rangeStart,
-        "insert_before": insertBefore,
-        "range_length": rangeLength
-      }
-    );
-    // console.log(response.data);
-  } catch (error) {
-    // console.error(error);
-  }
+  await axios.put(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
+    {
+      "range_start": rangeStart,
+      "insert_before": insertBefore,
+      "range_length": rangeLength
+    }
+  );
 };
 
 export const addItemsToPlaylist = async ({
@@ -124,18 +119,14 @@ export const addItemsToPlaylist = async ({
   position = null,
   uris,
 }) => {
-  try {
-    await axios.post(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
-      {
-        "uris": uris,
-        "position": position,
-      }
-    );
-    // console.log(response.data);
-  } catch (error) {
-    // console.error(error);
-  }
+  await axios.post(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
+    {
+      "uris": uris,
+      "position": position,
+    }
+  );
+  // console.log(response.data);
 };
 
 
@@ -144,25 +135,21 @@ export const deleteTrackFromPlaylist = async ({
   trackId,
   position,
 }) => {
-  try {
-    const response = await axios.delete(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
-      {
-        data: {
-          tracks:  [
-            { 
-              uri: `spotify:track:${trackId}`,
-              positions: [position]
-            }
-          ]
-        }
+  const response = await axios.delete(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
+    {
+      data: {
+        tracks:  [
+          { 
+            uri: `spotify:track:${trackId}`,
+            positions: [position]
+          }
+        ]
       }
-    );
-    // console.log(response.data);
-    return response
-  } catch (error) {
-    // console.error(error);
-  }
+    }
+  );
+  // console.log(response.data);
+  return response
 }
 
 export const createPlaylist = async (userId, data) => {
@@ -183,14 +170,10 @@ export const createPlaylist = async (userId, data) => {
 // };
 
 export const getQueue = async () => {
-  try {
-      const url = 'https://api.spotify.com/v1/me/player/queue'
-      await axios.get(url);
-      // Process the queue data as needed
-      // console.log('User queue:', response.data);
-  } catch (error) {
-      // console.log(error);
-  }
+  const url = 'https://api.spotify.com/v1/me/player/queue'
+  await axios.get(url);
+  // Process the queue data as needed
+  // console.log('User queue:', response.data);
 };
 
 // export const addTracksToQueue = async (deviceId, trackUris) => {
@@ -209,100 +192,70 @@ export const getQueue = async () => {
 // };
 
 export const addTrackToQueue = async (deviceId, trackUri) => {
-  try {
-    const url = `https://api.spotify.com/v1/me/player/queue?device_id=${deviceId}&uri=${trackUri}`;
-    await axios.post(url);
+  const url = `https://api.spotify.com/v1/me/player/queue?device_id=${deviceId}&uri=${trackUri}`;
+  await axios.post(url);
 
-    // console.log('Track added to queue successfully.');
-  } catch (error) {
-    // console.log(error);
-  }
+  // console.log('Track added to queue successfully.');
 };
 
 export async function playPlaylist(deviceId, playlistUri) {
-  try {
-      const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
-      const data = {
-          context_uri: playlistUri,
-      };
+  const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+  const data = {
+      context_uri: playlistUri,
+  };
 
-      await axios.put(url, data);
-
-      // console.log('Playback started for the playlist.');
-  } catch (error) {
-      // console.error('Error starting playback:', error.message);
-  }
+  await axios.put(url, data);
 }
 
 export async function play(deviceId, trackUri = null) {
-  try {
-      const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
-      const data = trackUri ? {
-          uris: [trackUri], // Pass the track URI as an array
-      }: null;
+  const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+  const data = trackUri ? {
+      uris: [trackUri], // Pass the track URI as an array
+  }: null;
 
-      await axios.put(url, data);
+  await axios.put(url, data);
 
-      // console.log('Track playback started.');
-  } catch (error) {
-      // console.error('Error starting track playback:', error.message);
-  }
+  // console.log('Track playback started.');
 }
 
 export async function playItem(deviceId, playlistId, position) {
-  try {
-      const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
-      const data = {
-        context_uri: `spotify:playlist:${playlistId}`,
-        offset: {
-          position // Replace with the position of the track you want to start playing
-        }
-      };
+  const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+  const data = {
+    context_uri: `spotify:playlist:${playlistId}`,
+    offset: {
+      position // Replace with the position of the track you want to start playing
+    }
+  };
 
-      await axios.put(url, data);
+  await axios.put(url, data);
 
-      // console.log('Playback started for the playlist.');
-  } catch (error) {
-      // console.error('Error starting playback:', error.message);
-  }
+  // console.log('Playback started for the playlist.');
 }
 
 export async function playPlaylistTrack(deviceId, playlistId, trackUri) {
-  try {
-      const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
-      const data = {
-        context_uri: `spotify:playlist:${playlistId}`,
-        offset: {
-          uri: trackUri,
-        }
-      };
+  const url = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+  const data = {
+    context_uri: `spotify:playlist:${playlistId}`,
+    offset: {
+      uri: trackUri,
+    }
+  };
 
-      await axios.put(url, data);
+  await axios.put(url, data);
 
-      // console.log('Playback started for the playlist.');
-  } catch (error) {
-      // console.error('Error starting playback:', error.message);
-  }
+  // console.log('Playback started for the playlist.');
 }
 
 export async function pause(deviceId) {
-  try {
-      const url = `https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`;
-      await axios.put(url);
+  const url = `https://api.spotify.com/v1/me/player/pause?device_id=${deviceId}`;
+  await axios.put(url);
 
-      // console.log('Playback paused.');
-  } catch (error) {
-      // console.error('Error pausing playback:', error.message);
-  }
+  // console.log('Playback paused.');
 }
 
 export async function getPlayerState() {
-  try {
-      const url = 'https://api.spotify.com/v1/me/player';
-      await axios.get(url);
+  const url = 'https://api.spotify.com/v1/me/player';
+  await axios.get(url);
 
-      // console.log('Player state:', response.data);
-  } catch (error) {
-      // console.error('Error getting player state:', error.message);
-  }
+  // console.log('Player state:', response.data);
 }

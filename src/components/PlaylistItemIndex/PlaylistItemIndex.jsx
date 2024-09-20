@@ -1,5 +1,6 @@
 import PlayButton, { PlayLineButtonContainer, PlayingButton } from "../PlayButton/PlayButton";
 import useStore from "../../store/store";
+import PropTypes from 'prop-types';
 
 const IndexComponent = ({
   isHovered,
@@ -46,6 +47,18 @@ const IndexComponent = ({
         )}
       </div>
   );
+};
+
+IndexComponent.propTypes = {
+  isHovered: PropTypes.bool.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  track: PropTypes.object.isRequired,
+  playlistId: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  playPlaylistTrack: PropTypes.func.isRequired,
+  setPlayingTrack: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
 };
 
 export default IndexComponent;
